@@ -207,6 +207,7 @@ function setupNotesList() {
     
     if (filteredNotes.length === 0) {
       notesList.style.display = 'none';
+      notesList.innerHTML = '';
       emptyState.style.display = 'flex';
       // If filtering by tag, show tag-specific message
       if (selectedTag && window.updateEmptyStateForTag) {
