@@ -40,3 +40,7 @@ js/pages/             Page scripts
 css/                  Page and component styles
 assets/vendor/quill/  Bundled Quill editor
 ```
+
+## Working with AI agents
+
+Agent instructions live in `AGENTS.md` (Claude Code picks them up through `CLAUDE.md`). Detailed project rules are in `.claude/rules/`, and agent role definitions are in `.claude/agents/`.
