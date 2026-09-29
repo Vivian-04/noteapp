@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system" data-font="sans-serif">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <title>Settings - Notes App</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./css/pages/settings.css">
+</head>
+<body>
+  <div class="settings-layout">
+    <!-- Desktop Sidebar -->
+    <aside class="notes-sidebar" aria-label="Navigation sidebar">
+      <div class="sidebar-logo">
+        <a href="./index.html" class="nav-logo" aria-label="Notes App Home">
+          <img src="./assets/images/logo-dark.svg" alt="Notes App">
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <button 
+          type="button"
+          class="sidebar-nav-item" 
+          id="allNotesBtn"
+          aria-label="View all notes">
+          <img src="./assets/images/icon-home.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">All Notes</span>
+          <img src="./assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </button>
+        
+        <button 
+          type="button"
+          class="sidebar-nav-item" 
+          id="archivedNotesBtn"
+          aria-label="View archived notes">
+          <img src="./assets/images/icon-archive.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Archived Notes</span>
+          <img src="./assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </button>
+
+        <a href="./todos/todos.html" class="sidebar-nav-item" aria-label="View to-do list">
+          <img src="./assets/images/icon-checklist.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">To-Do List</span>
+          <img src="./assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </a>
+      </nav>
+      
+      <div class="sidebar-separator"></div>
+      
+      <div class="sidebar-tags-section" id="sidebarTagsSection">
+        <h3 class="sidebar-tags-heading">Tags</h3>
+        <div class="sidebar-tags-list" id="sidebarTagsList">
+          <!-- Tags will be dynamically added here -->
+        </div>
+      </div>
+      
+      <div class="sidebar-footer">
+        <button 
+          type="button"
+          class="sidebar-logout-btn" 
+          id="logoutBtn"
+          aria-label="Logout">
+          <img src="./assets/images/icon-logout.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="settings-content-wrapper">
+      <!-- Desktop Header -->
+      <header class="settings-header">
+        <div class="settings-header-content">
+          <h1 class="settings-page-title">Settings</h1>
+          <div class="settings-header-actions">
+            <div class="search-container">
+              <img src="./assets/images/icon-search.svg" alt="" class="search-icon" aria-hidden="true">
+              <input 
+                type="search" 
+                id="settingsSearchInput"
+                class="search-input" 
+                placeholder="Search by title, content, or tags..."
+                aria-label="Search notes">
+            </div>
+            <div class="header-actions-right">
+              <button 
+                type="button"
+                class="theme-toggle" 
+                id="themeToggle" 
+                aria-label="Switch to dark mode"
+                aria-live="polite">
+                <img src="./assets/images/icon-moon.svg" alt="" class="theme-icon" id="themeIcon" aria-hidden="true">
+              </button>
+              <a href="./notes/notes.html" class="settings-link" aria-label="Back to notes">
+                <img src="./assets/images/icon-settings.svg" alt="" class="settings-icon" aria-hidden="true">
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Tablet/Mobile Header -->
+      <header class="settings-mobile-header">
+        <div class="mobile-header-top">
+          <a href="./index.html" class="mobile-logo" aria-label="Notes App Home">
+            <img src="./assets/images/logo.svg" alt="Notes App" class="mobile-logo-img">
+          </a>
+          <button 
+            type="button"
+            class="mobile-theme-toggle" 
+            id="mobileThemeToggle" 
+            aria-label="Switch theme"
+            aria-live="polite">
+            <img src="./assets/images/icon-moon.svg" alt="" class="mobile-theme-icon" id="mobileThemeIcon" aria-hidden="true">
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="settings-main">
+        <div class="settings-container">
+          <!-- Settings Menu Panel -->
+          <div class="settings-menu-panel">
+            <h1 class="settings-menu-title mobile-tablet-only">Settings</h1>
+            <div class="settings-menu" id="settingsMenu">
+              <button 
+                type="button"
+                class="settings-menu-item active" 
+                id="colorThemeBtn"
+                aria-label="Color Theme">
+                <img src="./assets/images/icon-sun.svg" alt="" class="menu-item-icon" aria-hidden="true">
+                <span class="menu-item-text">Color Theme</span>
+                <img src="./assets/images/icon-chevron-right.svg" alt="" class="menu-item-chevron" aria-hidden="true">
+              </button>
+              
+              <button 
+                type="button"
+                class="settings-menu-item" 
+                id="fontThemeBtn"
+                aria-label="Font Theme">
+                <img src="./assets/images/icon-font.svg" alt="" class="menu-item-icon" aria-hidden="true">
+                <span class="menu-item-text">Font Theme</span>
+                <img src="./assets/images/icon-chevron-right.svg" alt="" class="menu-item-chevron" aria-hidden="true">
+              </button>
+              
+              <button 
+                type="button"
+                class="settings-menu-item" 
+                id="changePasswordBtn"
+                aria-label="Change Password">
+                <img src="./assets/images/icon-lock.svg" alt="" class="menu-item-icon" aria-hidden="true">
+                <span class="menu-item-text">Change Password</span>
+                <img src="./assets/images/icon-chevron-right.svg" alt="" class="menu-item-chevron" aria-hidden="true">
+              </button>
+              
+              <div class="settings-menu-separator"></div>
+              
+              <button 
+                type="button"
+                class="settings-menu-item" 
+                id="settingsLogoutBtn"
+                aria-label="Logout">
+                <img src="./assets/images/icon-logout.svg" alt="" class="menu-item-icon" aria-hidden="true">
+                <span class="menu-item-text">Logout</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Settings Content Panel -->
+          <div class="settings-content-panel">
+            <!-- Color Theme View -->
+            <div class="settings-content-view" id="colorThemeView">
+              <div class="settings-content-wrap">
+                <div class="settings-content-top">
+                  <button 
+                    type="button"
+                    class="btn-back-to-settings mobile-only" 
+                    id="backToSettingsBtn"
+                    aria-label="Back to Settings"
+                    style="display: none;">
+                    <img src="./assets/images/icon-arrow-left.svg" alt="" class="back-icon" aria-hidden="true">
+                    <span class="back-text">Settings</span>
+                  </button>
+                  <div class="settings-content-header">
+                    <h2 class="settings-content-title">Color Theme</h2>
+                    <p class="settings-content-description">Choose your color theme:</p>
+                  </div>
+                </div>
+              
+              <div class="theme-options">
+                <button 
+                  type="button"
+                  class="theme-option" 
+                  data-theme="light"
+                  id="lightThemeOption"
+                  aria-label="Light Mode">
+                  <div class="theme-option-icon">
+                    <img src="./assets/images/icon-sun.svg" alt="" class="theme-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="theme-option-content">
+                    <p class="theme-option-title">Light Mode</p>
+                    <p class="theme-option-description">Pick a clean and classic light theme</p>
+                  </div>
+                  <div class="theme-radio">
+                    <div class="theme-radio-outer"></div>
+                    <div class="theme-radio-inner"></div>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  class="theme-option" 
+                  data-theme="dark"
+                  id="darkThemeOption"
+                  aria-label="Dark Mode">
+                  <div class="theme-option-icon">
+                    <img src="./assets/images/icon-moon.svg" alt="" class="theme-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="theme-option-content">
+                    <p class="theme-option-title">Dark Mode</p>
+                    <p class="theme-option-description">Select a sleek and modern dark theme</p>
+                  </div>
+                  <div class="theme-radio">
+                    <div class="theme-radio-outer"></div>
+                    <div class="theme-radio-inner"></div>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  class="theme-option" 
+                  data-theme="system"
+                  id="systemThemeOption"
+                  aria-label="System">
+                  <div class="theme-option-icon">
+                    <img src="./assets/images/icon-system-theme.svg" alt="" class="theme-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="theme-option-content">
+                    <p class="theme-option-title">System</p>
+                    <p class="theme-option-description">Adapts to your device's theme</p>
+                  </div>
+                  <div class="theme-radio">
+                    <div class="theme-radio-outer"></div>
+                    <div class="theme-radio-inner"></div>
+                  </div>
+                </button>
+              </div>
+              
+              <div class="settings-actions">
+                <button type="button" class="btn-apply-changes" id="applyThemeChangesBtn">Apply Changes</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Font Theme View (Placeholder for future) -->
+          <div class="settings-content-view" id="fontThemeView" style="display: none;">
+            <div class="settings-content-wrap">
+              <div class="settings-content-top">
+                <button 
+                  type="button"
+                  class="btn-back-to-settings mobile-only" 
+                  id="backToSettingsFromFontBtn"
+                  aria-label="Back to Settings"
+                  style="display: none;">
+                  <img src="./assets/images/icon-arrow-left.svg" alt="" class="back-icon" aria-hidden="true">
+                  <span class="back-text">Settings</span>
+                </button>
+                <div class="settings-content-header">
+                  <h2 class="settings-content-title">Font Theme</h2>
+                  <p class="settings-content-description">Choose your font theme:</p>
+                </div>
+              </div>
+              <div class="font-options">
+                <button 
+                  type="button"
+                  class="font-option font-option-active" 
+                  data-font="sans-serif"
+                  id="sansSerifOption"
+                  aria-label="Sans-serif">
+                  <div class="font-option-icon">
+                    <img src="./assets/images/icon-font-sans-serif.svg" alt="" class="font-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="font-option-content">
+                    <p class="font-option-title">Sans-serif</p>
+                    <p class="font-option-description">Clean and modern, easy to read.</p>
+                  </div>
+                  <div class="font-radio">
+                    <div class="font-radio-outer"></div>
+                    <div class="font-radio-inner"></div>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  class="font-option" 
+                  data-font="serif"
+                  id="serifOption"
+                  aria-label="Serif">
+                  <div class="font-option-icon">
+                    <img src="./assets/images/icon-font-serif.svg" alt="" class="font-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="font-option-content">
+                    <p class="font-option-title">Serif</p>
+                    <p class="font-option-description">Classic and elegant for a timeless feel.</p>
+                  </div>
+                  <div class="font-radio">
+                    <div class="font-radio-outer"></div>
+                    <div class="font-radio-inner"></div>
+                  </div>
+                </button>
+                
+                <button 
+                  type="button"
+                  class="font-option" 
+                  data-font="monospace"
+                  id="monospaceOption"
+                  aria-label="Monospace">
+                  <div class="font-option-icon">
+                    <img src="./assets/images/icon-font-monospace.svg" alt="" class="font-icon-img" aria-hidden="true">
+                  </div>
+                  <div class="font-option-content">
+                    <p class="font-option-title">Monospace</p>
+                    <p class="font-option-description">Code-like, great for a technical vibe.</p>
+                  </div>
+                  <div class="font-radio">
+                    <div class="font-radio-outer"></div>
+                    <div class="font-radio-inner"></div>
+                  </div>
+                </button>
+              </div>
+              
+              <div class="settings-actions">
+                <button type="button" class="btn-apply-changes" id="applyFontChangesBtn">Apply Changes</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Change Password View -->
+          <div class="settings-content-view" id="changePasswordView" style="display: none;">
+            <div class="settings-content-wrap">
+              <div class="settings-content-top">
+                <button 
+                  type="button"
+                  class="btn-back-to-settings mobile-only" 
+                  id="backToSettingsFromPasswordBtn"
+                  aria-label="Back to Settings"
+                  style="display: none;">
+                  <img src="./assets/images/icon-arrow-left.svg" alt="" class="back-icon" aria-hidden="true">
+                  <span class="back-text">Settings</span>
+                </button>
+                <div class="settings-content-header">
+                  <h2 class="settings-content-title">Change Password</h2>
+                </div>
+              </div>
+              
+              <form class="change-password-form" id="changePasswordForm">
+                <div class="password-input-group" id="oldPasswordGroup"></div>
+                <div class="password-input-group" id="newPasswordGroup"></div>
+                <div class="password-input-group" id="confirmPasswordGroup"></div>
+                
+                <div class="settings-actions">
+                  <button type="submit" class="btn-apply-changes" id="savePasswordBtn">Save Password</button>
+                </div>
+              </form>
+            </div>
+          </div>
+            </div>
+          </main>
+        </div>
+
+        <!-- Third Sidebar (Archive/Delete Actions) -->
+        <aside class="settings-actions-sidebar" id="settingsActionsSidebar">
+          <div class="actions-sidebar-content" id="settingsActionsSidebarContent" style="display: none;">
+            <button type="button" class="btn-action-archive" id="settingsArchiveNoteBtn" aria-label="Archive note">
+              <img src="./assets/images/icon-archive.svg" alt="" class="action-icon" aria-hidden="true">
+              <span>Archive Note</span>
+            </button>
+            <button type="button" class="btn-action-delete" id="settingsDeleteNoteBtn" aria-label="Delete note">
+              <img src="./assets/images/icon-delete.svg" alt="" class="action-icon" aria-hidden="true">
+              <span>Delete Note</span>
+            </button>
+          </div>
+        </aside>
+
+        <!-- Tablet/Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Bottom navigation">
+      <a 
+        href="./notes/notes.html"
+        class="bottom-nav-item" 
+        aria-label="Home">
+        <img src="./assets/images/icon-home.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Home</span>
+      </a>
+      
+      <a 
+        href="./notes/notes.html#search"
+        class="bottom-nav-item" 
+        aria-label="Search">
+        <img src="./assets/images/icon-search.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Search</span>
+      </a>
+      
+      <a 
+        href="./notes/notes.html#archived"
+        class="bottom-nav-item" 
+        aria-label="Archived">
+        <img src="./assets/images/icon-archive.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Archived</span>
+      </a>
+      
+      <a 
+        href="./notes/notes.html#tags"
+        class="bottom-nav-item" 
+        aria-label="Tags">
+        <img src="./assets/images/icon-tag.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Tags</span>
+      </a>
+      
+      <a 
+        href="./todos/todos.html"
+        class="bottom-nav-item" 
+        aria-label="To-Do">
+        <img src="./assets/images/icon-checklist.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">To-Do</span>
+      </a>
+      
+      <button 
+        type="button"
+        class="bottom-nav-item active" 
+        id="mobileSettingsBtn"
+        aria-label="Settings"
+        aria-current="page">
+        <img src="./assets/images/icon-settings.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <script type="module" src="./js/pages/settings.js"></script>
+</body>
+</html>

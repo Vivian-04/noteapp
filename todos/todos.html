@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system" data-font="sans-serif">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <title>To-Do List - Notes App</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../base.css">
+  <link rel="stylesheet" href="../css/pages/todos.css">
+</head>
+<body>
+  <div class="notes-layout">
+    <!-- Desktop Sidebar -->
+    <aside class="notes-sidebar" aria-label="Navigation sidebar">
+      <div class="sidebar-logo">
+        <a href="../index.html" class="nav-logo" aria-label="Notes App Home">
+          <img src="../assets/images/logo-dark.svg" alt="Notes App">
+        </a>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../notes/notes.html" class="sidebar-nav-item" aria-label="View all notes">
+          <img src="../assets/images/icon-home.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">All Notes</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </a>
+
+        <a href="../notes/notes.html#archived" class="sidebar-nav-item" aria-label="View archived notes">
+          <img src="../assets/images/icon-archive.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Archived Notes</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </a>
+
+        <a href="./todos.html" class="sidebar-nav-item active" aria-label="View to-do list" aria-current="page">
+          <img src="../assets/images/icon-checklist.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">To-Do List</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button
+          type="button"
+          class="sidebar-logout-btn"
+          id="logoutBtn"
+          aria-label="Logout">
+          <img src="../assets/images/icon-logout.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="notes-content-wrapper todos-content-wrapper">
+      <!-- Desktop Header -->
+      <header class="notes-header">
+        <div class="notes-header-content">
+          <h1 class="notes-page-title">To-Do List</h1>
+          <div class="notes-header-actions">
+            <div class="search-container">
+              <img src="../assets/images/icon-search.svg" alt="" class="search-icon" aria-hidden="true">
+              <input
+                type="search"
+                id="todoSearchInput"
+                class="search-input"
+                placeholder="Search tasks..."
+                aria-label="Search tasks">
+            </div>
+            <div class="header-actions-right">
+              <button
+                type="button"
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Switch to dark mode"
+                aria-live="polite">
+                <img src="../assets/images/icon-moon.svg" alt="" class="theme-icon" id="themeIcon" aria-hidden="true">
+              </button>
+              <a href="../settings.html" class="settings-link" aria-label="Settings">
+                <img src="../assets/images/icon-settings.svg" alt="" class="settings-icon" aria-hidden="true">
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Header -->
+      <header class="notes-mobile-header">
+        <div class="mobile-header-top">
+          <a href="../index.html" class="mobile-logo" aria-label="Notes App Home">
+            <img src="../assets/images/logo.svg" alt="Notes App" class="mobile-logo-img">
+          </a>
+          <button
+            type="button"
+            class="mobile-theme-toggle"
+            id="mobileThemeToggle"
+            aria-label="Switch theme"
+            aria-live="polite">
+            <img src="../assets/images/icon-moon.svg" alt="" class="mobile-theme-icon" id="mobileThemeIcon" aria-hidden="true">
+          </button>
+        </div>
+      </header>
+
+      <main class="notes-main todos-main">
+        <div class="todos-container">
+          <h1 class="todos-mobile-title">To-Do List</h1>
+
+          <div class="search-container todos-mobile-search">
+            <img src="../assets/images/icon-search.svg" alt="" class="search-icon" aria-hidden="true">
+            <input
+              type="search"
+              id="todoSearchInputMobile"
+              class="search-input"
+              placeholder="Search tasks..."
+              aria-label="Search tasks">
+          </div>
+
+          <!-- Progress summary -->
+          <section class="todos-progress" aria-label="Progress">
+            <div class="todos-progress-text">
+              <span class="todos-progress-label" id="todoProgressLabel">No tasks yet</span>
+              <span class="todos-progress-percent" id="todoProgressPercent">0%</span>
+            </div>
+            <div class="todos-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="todoProgressBar">
+              <div class="todos-progress-fill" id="todoProgressFill"></div>
+            </div>
+          </section>
+
+          <!-- Add task form -->
+          <form class="todo-form" id="todoForm" novalidate>
+            <label for="todoText" class="sr-only">New task</label>
+            <input
+              type="text"
+              id="todoText"
+              class="todo-input todo-input-text"
+              placeholder="What needs to be done?"
+              maxlength="200"
+              autocomplete="off">
+            <div class="todo-form-row">
+              <label class="todo-field">
+                <span class="todo-field-label">Due</span>
+                <input type="date" id="todoDueDate" class="todo-input todo-input-date" aria-label="Due date">
+              </label>
+              <label class="todo-field">
+                <span class="todo-field-label">Priority</span>
+                <select id="todoPriority" class="todo-input todo-input-select" aria-label="Priority">
+                  <option value="low">Low</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="high">High</option>
+                </select>
+              </label>
+              <button type="submit" class="btn-add-todo">
+                <img src="../assets/images/icon-plus.svg" alt="" class="btn-icon" aria-hidden="true">
+                <span>Add Task</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- Filters and sorting -->
+          <div class="todo-toolbar">
+            <div class="todo-filters" role="tablist" aria-label="Filter tasks">
+              <button type="button" class="todo-filter active" data-filter="all" role="tab" aria-selected="true">All <span class="todo-count" data-count="all">0</span></button>
+              <button type="button" class="todo-filter" data-filter="active" role="tab" aria-selected="false">Active <span class="todo-count" data-count="active">0</span></button>
+              <button type="button" class="todo-filter" data-filter="completed" role="tab" aria-selected="false">Done <span class="todo-count" data-count="completed">0</span></button>
+              <button type="button" class="todo-filter" data-filter="overdue" role="tab" aria-selected="false">Overdue <span class="todo-count" data-count="overdue">0</span></button>
+            </div>
+            <div class="todo-toolbar-right">
+              <label for="todoSort" class="sr-only">Sort tasks</label>
+              <select id="todoSort" class="todo-input todo-input-select todo-sort">
+                <option value="created">Newest first</option>
+                <option value="due">Due date</option>
+                <option value="priority">Priority</option>
+              </select>
+              <button type="button" class="btn-clear-completed" id="clearCompletedBtn">Clear done</button>
+            </div>
+          </div>
+
+          <!-- Task list -->
+          <ul class="todo-list" id="todoList" aria-live="polite"></ul>
+
+          <div class="todo-empty" id="todoEmpty">
+            <p id="todoEmptyText">You don't have any tasks yet. Add one above to get started.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Clear Completed Modal -->
+    <div class="modal-overlay" id="clearModalOverlay" style="display: none;">
+      <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="clearModalTitle">
+        <div class="modal-header">
+          <img src="../assets/images/icon-delete.svg" alt="" class="modal-icon" aria-hidden="true">
+          <h2 class="modal-title" id="clearModalTitle">Clear Completed Tasks</h2>
+        </div>
+        <div class="modal-body">
+          <p class="modal-message">Are you sure you want to permanently delete all completed tasks? This action cannot be undone.</p>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" id="clearModalCancel">Cancel</button>
+          <button type="button" class="btn-modal-delete" id="clearModalConfirm">Clear Tasks</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Bottom navigation">
+      <a href="../notes/notes.html" class="bottom-nav-item" aria-label="Home">
+        <img src="../assets/images/icon-home.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Home</span>
+      </a>
+
+      <button type="button" class="bottom-nav-item" id="mobileSearchBtn" aria-label="Search">
+        <img src="../assets/images/icon-search.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Search</span>
+      </button>
+
+      <a href="../notes/notes.html#archived" class="bottom-nav-item" aria-label="Archived">
+        <img src="../assets/images/icon-archive.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Archived</span>
+      </a>
+
+      <a href="./todos.html" class="bottom-nav-item active" aria-label="To-Do" aria-current="page">
+        <img src="../assets/images/icon-checklist.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">To-Do</span>
+      </a>
+
+      <a href="../settings.html" class="bottom-nav-item" aria-label="Settings">
+        <img src="../assets/images/icon-settings.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Settings</span>
+      </a>
+    </nav>
+  </div>
+
+  <script type="module" src="../js/pages/todos.js"></script>
+</body>
+</html>

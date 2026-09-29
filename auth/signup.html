@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system" data-font="sans-serif">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <title>Sign Up - Notes App</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../base.css">
+</head>
+<body>
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a href="../index.html" class="auth-logo" aria-label="Notes App Home">
+          <img src="../assets/images/logo-dark.svg" alt="Notes App">
+        </a>
+        <h1 class="auth-title">Create Your Account</h1>
+        <p class="auth-subtitle">Sign up to start organizing your notes and boost your productivity.</p>
+      </div>
+
+      <form class="auth-form" id="signupForm" novalidate>
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <div class="form-input-wrapper">
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              class="form-input" 
+              placeholder="email@example.com"
+              required
+              aria-required="true"
+              aria-describedby="email-error">
+          </div>
+          <span class="form-error" id="email-error" role="alert" aria-live="polite"></span>
+        </div>
+
+        <div id="passwordContainer"></div>
+
+        <button type="submit" class="btn-auth-primary">Sign up</button>
+      </form>
+
+      <div class="auth-divider-line auth-divider-top"></div>
+
+      <div class="auth-divider">
+        <span class="divider-text">Or log in with:</span>
+      </div>
+
+      <button type="button" class="btn-auth-google" aria-label="Sign up with Google">
+        <img src="../assets/images/icon-google.svg" alt="" class="google-icon" aria-hidden="true">
+        <span>Google</span>
+      </button>
+      
+      <div class="auth-divider-line"></div>
+
+      <p class="auth-footer">
+        Already have an account? <a href="./login.html" class="auth-link">Login</a>
+      </p>
+
+      <div class="auth-theme-toggle">
+        <button 
+          type="button"
+          class="theme-toggle" 
+          id="themeToggle" 
+          aria-label="Switch to dark mode"
+          aria-live="polite">
+          <img src="../assets/images/icon-moon.svg" alt="" class="theme-icon" id="themeIcon" aria-hidden="true">
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/pages/signup.js"></script>
+</body>
+</html>

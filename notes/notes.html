@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system" data-font="sans-serif">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+  <title>Notes - Notes App</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../base.css">
+  <!-- Quill CSS -->
+  <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+  <div class="notes-layout">
+    <!-- Desktop Sidebar -->
+    <aside class="notes-sidebar" aria-label="Navigation sidebar">
+      <div class="sidebar-logo">
+        <a href="../index.html" class="nav-logo" aria-label="Notes App Home">
+          <img src="../assets/images/logo-dark.svg" alt="Notes App">
+        </a>
+      </div>
+      
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <button 
+          type="button"
+          class="sidebar-nav-item active" 
+          id="allNotesBtn"
+          aria-label="View all notes"
+          aria-current="page">
+          <img src="../assets/images/icon-home.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">All Notes</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </button>
+        
+        <button 
+          type="button"
+          class="sidebar-nav-item" 
+          id="archivedNotesBtn"
+          aria-label="View archived notes">
+          <img src="../assets/images/icon-archive.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Archived Notes</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </button>
+
+        <a href="../todos/todos.html" class="sidebar-nav-item" aria-label="View to-do list">
+          <img src="../assets/images/icon-checklist.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">To-Do List</span>
+          <img src="../assets/images/icon-chevron-right.svg" alt="" class="nav-chevron" aria-hidden="true">
+        </a>
+      </nav>
+      
+      <div class="sidebar-separator"></div>
+      
+      <div class="sidebar-tags-section" id="sidebarTagsSection">
+        <h3 class="sidebar-tags-heading">Tags</h3>
+        <div class="sidebar-tags-list" id="sidebarTagsList">
+          <!-- Tags will be dynamically added here -->
+        </div>
+      </div>
+      
+      <div class="sidebar-footer">
+        <button 
+          type="button"
+          class="sidebar-logout-btn" 
+          id="logoutBtn"
+          aria-label="Logout">
+          <img src="../assets/images/icon-logout.svg" alt="" class="nav-icon" aria-hidden="true">
+          <span class="nav-text">Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="notes-content-wrapper">
+      <!-- Desktop Header -->
+      <header class="notes-header">
+        <div class="notes-header-content">
+          <h1 class="notes-page-title" id="pageTitle">All Notes</h1>
+          <div class="notes-header-actions">
+            <div class="search-container">
+              <img src="../assets/images/icon-search.svg" alt="" class="search-icon" aria-hidden="true">
+              <input 
+                type="search" 
+                id="searchInput"
+                class="search-input" 
+                placeholder="Search by title, content, or tags..."
+                aria-label="Search notes">
+            </div>
+            <div class="header-actions-right">
+              <button 
+                type="button"
+                class="theme-toggle" 
+                id="themeToggle" 
+                aria-label="Switch to dark mode"
+                aria-live="polite">
+                <img src="../assets/images/icon-moon.svg" alt="" class="theme-icon" id="themeIcon" aria-hidden="true">
+              </button>
+              <a href="../settings.html" class="settings-link" aria-label="Settings">
+                <img src="../assets/images/icon-settings.svg" alt="" class="settings-icon" aria-hidden="true">
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Mobile Header -->
+      <header class="notes-mobile-header">
+        <div class="mobile-header-top">
+          <a href="../index.html" class="mobile-logo" aria-label="Notes App Home">
+            <img src="../assets/images/logo.svg" alt="Notes App" class="mobile-logo-img">
+          </a>
+          <button 
+            type="button"
+            class="mobile-theme-toggle" 
+            id="mobileThemeToggle" 
+            aria-label="Switch theme"
+            aria-live="polite">
+            <img src="../assets/images/icon-moon.svg" alt="" class="mobile-theme-icon" id="mobileThemeIcon" aria-hidden="true">
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="notes-main">
+        <div class="notes-container">
+          <!-- Mobile/Tablet page title -->
+          <h1 class="mobile-page-title">All Notes</h1>
+
+          <!-- Mobile/Tablet search -->
+          <div class="search-container mobile-search-container">
+            <img src="../assets/images/icon-search.svg" alt="" class="search-icon" aria-hidden="true">
+            <input 
+              type="search" 
+              id="mobileSearchInput"
+              class="search-input" 
+              placeholder="Search by title, content, or tags..."
+              aria-label="Search notes">
+          </div>
+
+          <!-- Mobile/Tablet tags picker -->
+          <div class="mobile-tags-panel" id="mobileTagsPanel" hidden>
+            <p class="mobile-tags-heading">Filter by tag</p>
+            <div class="mobile-tags-list" id="mobileTagsList"></div>
+          </div>
+
+          <!-- Create New Note Button -->
+          <button type="button" class="btn-create-note" id="createNoteBtn" aria-label="Create new note">
+            <img src="../assets/images/icon-plus.svg" alt="" class="btn-icon" aria-hidden="true">
+            <span>Create New Note</span>
+          </button>
+          
+          <!-- Load Sample Notes Button -->
+          <button type="button" class="btn-create-note" id="loadSampleNotesBtn" aria-label="Load sample notes">
+            <span>Load Sample Notes</span>
+          </button>
+          
+          <!-- Notes Grid (will be populated dynamically) -->
+          <div class="notes-list" id="notesList" style="display: none;"></div>
+          
+          <!-- Empty State (shown when no notes) -->
+          <div class="notes-empty-state" id="emptyState">
+            <div class="empty-state-info" id="emptyStateInfo" style="display: none;">
+              <p id="emptyStateInfoText"></p>
+            </div>
+            <div class="empty-state-message" id="emptyStateMessage">
+              <p class="empty-state-text" id="emptyStateText">You don't have any notes yet. Start a new note to capture your thoughts and ideas.</p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar Panel -->
+      <aside class="notes-right-panel" id="rightPanel">
+        <!-- Note Editor (shown when creating/editing) -->
+        <div class="note-editor" id="noteEditor" style="display: none;">
+          <!-- Mobile/Tablet Page Header Control (shown only on mobile/tablet) -->
+          <div class="mobile-page-header-control" id="mobilePageHeaderControl" style="display: none;">
+            <button type="button" class="btn-go-back-mobile" id="goBackBtnMobile" aria-label="Go back to notes list">
+              <img src="../assets/images/icon-chevron-left.svg" alt="" class="back-icon" aria-hidden="true">
+              <span class="back-text">Go Back</span>
+            </button>
+            <div class="mobile-page-header-actions">
+              <button type="button" class="btn-action-delete-mobile" id="deleteNoteBtnMobile" aria-label="Delete note">
+                <img src="../assets/images/icon-delete.svg" alt="" class="action-icon" aria-hidden="true">
+              </button>
+              <button type="button" class="btn-action-archive-mobile" id="archiveNoteBtnMobile" aria-label="Archive note">
+                <img src="../assets/images/icon-archive.svg" alt="" class="action-icon" aria-hidden="true">
+              </button>
+              <button type="button" class="btn-cancel-mobile" id="cancelNoteBtnMobile">Cancel</button>
+              <button type="button" class="btn-save-mobile" id="saveNoteBtnMobile">Save Note</button>
+            </div>
+          </div>
+          
+          <div class="editor-section">
+            <input 
+              type="text" 
+              id="noteTitle" 
+              class="editor-title-input" 
+              placeholder="Enter a title..."
+              aria-label="Note title">
+          </div>
+          
+          <div class="editor-meta-section">
+            <div class="editor-meta-row">
+              <div class="editor-meta-item">
+                <label for="noteTags" class="editor-meta-label">
+                  <img src="../assets/images/icon-tag.svg" alt="" class="meta-icon" aria-hidden="true">
+                  <span>Tags</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="noteTags" 
+                  class="editor-tags-input" 
+                  placeholder="Add tags separated by commas (e.g. Work, Planning)"
+                  aria-label="Note tags">
+              </div>
+              
+              <div class="editor-meta-item">
+                <div class="editor-meta-label">
+                  <img src="../assets/images/icon-clock.svg" alt="" class="meta-icon" aria-hidden="true">
+                  <span>Last edited</span>
+                </div>
+                <div class="editor-meta-value" id="lastEdited">Not yet saved</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="editor-separator"></div>
+          
+          <div class="editor-content-section">
+            <div id="noteContentEditor" class="note-content-editor"></div>
+          </div>
+          
+          <div class="editor-actions">
+            <button type="button" class="btn-save-note" id="saveNoteBtn">Save Note</button>
+            <button type="button" class="btn-cancel-note" id="cancelNoteBtn">Cancel</button>
+          </div>
+        </div>
+      </aside>
+      
+      <!-- Third Sidebar (Archive/Delete Actions) -->
+      <aside class="notes-actions-sidebar" id="actionsSidebar">
+        <div class="actions-sidebar-content" id="actionsSidebarContent" style="display: none;">
+          <button type="button" class="btn-action-archive" id="archiveNoteBtn" aria-label="Archive note">
+            <img src="../assets/images/icon-archive.svg" alt="" class="action-icon" aria-hidden="true">
+            <span>Archive Note</span>
+          </button>
+          <button type="button" class="btn-action-delete" id="deleteNoteBtn" aria-label="Delete note">
+            <img src="../assets/images/icon-delete.svg" alt="" class="action-icon" aria-hidden="true">
+            <span>Delete Note</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Delete Note Modal -->
+    <div class="modal-overlay" id="deleteModalOverlay" style="display: none;">
+      <div class="modal-container">
+        <div class="modal-header">
+          <img src="../assets/images/icon-delete.svg" alt="" class="modal-icon" aria-hidden="true">
+          <h2 class="modal-title">Delete Note</h2>
+        </div>
+        <div class="modal-body">
+          <p class="modal-message">Are you sure you want to permanently delete this note? This action cannot be undone.</p>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" id="deleteModalCancel">Cancel</button>
+          <button type="button" class="btn-modal-delete" id="deleteModalConfirm">Delete Note</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Archive Note Modal -->
+    <div class="modal-overlay" id="archiveModalOverlay" style="display: none;">
+      <div class="modal-container">
+        <div class="modal-header">
+          <img src="../assets/images/icon-archive.svg" alt="" class="modal-icon" aria-hidden="true">
+          <h2 class="modal-title">Archive Note</h2>
+        </div>
+        <div class="modal-body">
+          <p class="modal-message">Are you sure you want to archive this note? You can find it in the Archived Notes section and restore it anytime.</p>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" id="archiveModalCancel">Cancel</button>
+          <button type="button" class="btn-modal-archive" id="archiveModalConfirm">Archive Note</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Floating Action Button -->
+    <button 
+      type="button"
+      class="fab-create-note" 
+      id="mobileCreateNoteBtn"
+      aria-label="Create new note">
+      <img src="../assets/images/icon-plus.svg" alt="" class="fab-icon" aria-hidden="true">
+    </button>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Bottom navigation">
+      <button 
+        type="button"
+        class="bottom-nav-item active" 
+        id="mobileHomeBtn"
+        aria-label="Home"
+        aria-current="page">
+        <img src="../assets/images/icon-home.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Home</span>
+      </button>
+      
+      <button 
+        type="button"
+        class="bottom-nav-item" 
+        id="mobileSearchBtn"
+        aria-label="Search">
+        <img src="../assets/images/icon-search.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Search</span>
+      </button>
+      
+      <button 
+        type="button"
+        class="bottom-nav-item" 
+        id="mobileArchivedBtn"
+        aria-label="Archived">
+        <img src="../assets/images/icon-archive.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Archived</span>
+      </button>
+      
+      <button 
+        type="button"
+        class="bottom-nav-item" 
+        id="mobileTagsBtn"
+        aria-label="Tags">
+        <img src="../assets/images/icon-tag.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Tags</span>
+      </button>
+      
+      <a 
+        href="../todos/todos.html"
+        class="bottom-nav-item" 
+        aria-label="To-Do">
+        <img src="../assets/images/icon-checklist.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">To-Do</span>
+      </a>
+      
+      <button 
+        type="button"
+        class="bottom-nav-item" 
+        id="mobileSettingsBtn"
+        aria-label="Settings">
+        <img src="../assets/images/icon-settings.svg" alt="" class="bottom-nav-icon" aria-hidden="true">
+        <span class="bottom-nav-text">Settings</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Quill JS -->
+  <script src="../assets/vendor/quill/quill.min.js"></script>
+  <script type="module" src="../js/pages/notes.js"></script>
+</body>
+</html>
